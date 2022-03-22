@@ -15,6 +15,11 @@ const userSchema = new mongoose.Schema({
         minlength: 5
     },
 
+    isAdmin: {
+        type: Boolean,
+        default: false
+    },
+
     userData: {
         legalName: String,
         DOB: Date

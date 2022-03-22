@@ -12,18 +12,24 @@ function CreateUser() {
         e.preventDefault()
         const body = {
             "username": username,
-            "password": encryptWithAES(password)
+            "password": encryptWithAES(password),
+            "isAdmin": isAdmin
         }
        axios.post('http://localhost:5000/users/add', body).then(res => console.log(res.data))
        alert("User was added successfully")
  }
 
+    let isAdmin = false
 
     const handleChangeUser = event => {
         setUsername(event.target.value)
     }
     const handleChangePass = event => {
         setPassword(event.target.value)
+    }
+
+    const changeAdminState = e => {
+        isAdmin = !isAdmin
     }
 
  
@@ -42,6 +48,12 @@ function CreateUser() {
             type="password"
             required={true}
             onChange={handleChangePass}/>
+            <label>
+                Is Admin?
+                <input type="checkbox"
+                onChange={(e) => changeAdminState()}
+                />
+            </label>
             <input type="submit"/>
         </form>
       

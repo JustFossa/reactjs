@@ -4,15 +4,23 @@ let User = require("../models/user.model")
 const router = express.Router()
 const CryptoJS = require("crypto-js")
 router.get('/',(req, res) => {
+    
     User.find()
-    .then(users => res.json(users))
+    .then(users => {
+        let userarray = []
+        users.forEach(u => {
+            userarray.push(u.username)
+        })
+
+        res.json(userarray)
+})
     .catch(err => res.status(400).json('Error: ' + err))
 })
 
 router.post('/add',(req, res) => {
     const user = req.body.username
     const pass = req.body.password
-
+    const admin = req.body.isAdmin
     const userdata = {
         legalName: user + " User",
         DOB: Date.now()
@@ -20,6 +28,7 @@ router.post('/add',(req, res) => {
     const newUser = new User({
         username: user,
         password: pass,
+        isAdmin: admin,
         userData: userdata
     })
 
@@ -50,7 +59,3 @@ router.post("/update/password/:user", (req, res) => {
 
 module.exports = router
 
-const encryptWithAES = (text) => {
-    const passphrase = '@07!Rusnacok*7';
-    return CryptoJS.AES.encrypt(text, passphrase).toString();
-  };

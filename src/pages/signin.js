@@ -8,16 +8,22 @@ import Cookies from 'js-cookie'
 function Login() {
     const [user, setUser] = useState("")
     const [password, setPassword] = useState("")
-
+    let staySigned = false
 
     const checkExist = e => {
         e.preventDefault()
+        console.log(staySigned)
         axios.get(`http://localhost:5000/users/find/${user}`)
             .then(res => {
                 if (res.data !== null) {
                     if(password === decryptWithAES(res.data["password"])) {
                        alert("Correct")
-                       Cookies.set("user", user)
+                       if(staySigned === true) {
+                          Cookies.set("user", user, {expires: 14}) 
+                       } else {
+                        Cookies.set("user", user) 
+                       }
+                       
                        window.location = "/dashboard"
                     } else {
                         alert("Invalid password")
@@ -28,6 +34,9 @@ function Login() {
 
     }
 
+    const checkBox = e => {
+        staySigned = !staySigned
+    }
     
 
     return (
@@ -50,6 +59,13 @@ function Login() {
                 placeholder='Password'
                 onChange={(e) => setPassword(e.target.value)}
             />
+            <label>
+                Stay signed In (14 days)
+                <input type="checkbox"
+                    onChange={(e) => checkBox()}
+                />
+
+            </label>
             <input type="submit"/>
         </form>
 

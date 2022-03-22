@@ -13,8 +13,15 @@ const userSchema = new mongoose.Schema({
         unique: false,
         trim: true,
         minlength: 5
+    },
+
+    userData: {
+        legalName: String,
+        DOB: Date
     }
-}, {
+},
+
+{
     timestamps: true
 })
 

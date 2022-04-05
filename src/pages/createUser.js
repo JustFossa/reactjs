@@ -64,12 +64,12 @@ function CreateUser() {
 export default CreateUser
 
 const encryptWithAES = (text) => {
-    const passphrase = '@07!Rusnacok*7';
+    const passphrase = '123456';
     return CryptoJS.AES.encrypt(text, passphrase).toString();
   };
   
   const decryptWithAES = (ciphertext) => {
-    const passphrase = '@07!Rusnacok*7';
+    const passphrase = '123456';
     const bytes = CryptoJS.AES.decrypt(ciphertext, passphrase);
     const originalText = bytes.toString(CryptoJS.enc.Utf8);
     return originalText;

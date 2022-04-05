@@ -20,6 +20,9 @@ function Layout() {
             <li>
                 <Link to="/createuser">Create User</Link>
             </li>
+            <li>
+                <Link to="/register">Register</Link>
+            </li>
         </ul>
     </nav>
     <Outlet />

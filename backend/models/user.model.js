@@ -22,6 +22,7 @@ const userSchema = new mongoose.Schema({
 
     userData: {
         legalName: String,
+        formattedDob: String,
         DOB: Date
     }
 },

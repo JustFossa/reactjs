@@ -9,7 +9,7 @@ import Layout from './pages/layout.js'
 import Login from './pages/signin'
 import Dashboard from './pages/dashboard.js'
 import CreateUser from './pages/createUser';
-
+import Registration from './pages/register';
 
 
 export default function App() {
@@ -23,6 +23,7 @@ export default function App() {
         <Route path="login" element={<Login />} />
         <Route path="dashboard" element={<Dashboard />} />
         <Route path="createuser" element={<CreateUser />} />
+        <Route path="register" element={<Registration />} />
       </Route>
     </Routes>
   </BrowserRouter>

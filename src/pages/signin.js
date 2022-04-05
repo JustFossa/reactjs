@@ -9,11 +9,14 @@ function Login() {
     const [user, setUser] = useState("")
     const [password, setPassword] = useState("")
     let staySigned = false
-
+    
     const checkExist = e => {
+        const body = {
+            "key":"admin"
+        }
         e.preventDefault()
         console.log(staySigned)
-        axios.get(`http://localhost:5000/users/find/${user}`)
+        axios.get(`http://localhost:5000/users/find/${user}`,body)
             .then(res => {
                 if (res.data !== null) {
                     if(password === decryptWithAES(res.data["password"])) {
@@ -79,12 +82,12 @@ function Login() {
 export default Login
 
 const encryptWithAES = (text) => {
-    const passphrase = '@07!Rusnacok*7';
+    const passphrase = '123456';
     return CryptoJS.AES.encrypt(text, passphrase).toString();
   };
   
   const decryptWithAES = (ciphertext) => {
-    const passphrase = '@07!Rusnacok*7';
+    const passphrase = '123456';
     const bytes = CryptoJS.AES.decrypt(ciphertext, passphrase);
     const originalText = bytes.toString(CryptoJS.enc.Utf8);
     return originalText;
